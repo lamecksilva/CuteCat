@@ -24,6 +24,7 @@ _Cliente_:
 - Cadastro
 - Login
 - Visualizar Agendamentos / Criar / Cancelar / Remarcar
+- Visualizar Pet / Criar / Editar / Excluir
 - Contato (Chat)
 - Deletar Conta
 
@@ -33,3 +34,21 @@ _Administrador_:
 - Visualizar Clientes (Excluir)
 - Chat com Cliente
 - Visualizar Agendamentos (Avaliar, Remarcar, Reprovar, Excluir)
+
+#### Rotas:
+
+- Clientes
+
+  - Cadastro
+  - Login
+  - Visualizar Agendamentos (Dele)
+  - Criar Agendamento / Cancelar / Remarcar
+  - Criar Pet / Editar / Exluir
+  - Excluir Conta
+  - Chat\*
+
+- Administradores
+  - Login
+  - Visualizar clientes / Excluir
+  - Visualizar Agendamentos (Pendentes/Aprovados/Reprovados) / Excluir
+  - Chat\*
