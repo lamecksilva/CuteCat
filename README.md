@@ -6,15 +6,15 @@ Repositório do CuteCat, um sistema de agendamento de Hospedagens para cachorros
 
 React Native  
 Nodejs  
-Typescript
-Reactjs
-Docker
-Kubernetes
+Typescript  
+Reactjs  
+Docker  
+Kubernetes  
 CI / CD
 
 #### Ferramentas
 
-Insomnia
+Insomnia  
 Visual Studio Code
 
 #### Funcionalidades Básicas
@@ -35,7 +35,7 @@ _Administrador_:
 - Chat com Cliente
 - Visualizar Agendamentos (Avaliar, Remarcar, Reprovar, Excluir)
 
-#### Rotas:
+#### Rotas Básicas (API):
 
 - Clientes
 
