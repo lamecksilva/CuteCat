@@ -1,76 +1,80 @@
-import express, { Request, Response, json } from 'express';
+import { startServer } from './src/server';
 
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import { makeExecutableSchema } from 'graphql-tools';
+startServer();
 
-const app = express();
+// import express, { Request, Response, json } from 'express';
 
-app.use(json());
+// import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+// import { makeExecutableSchema } from 'graphql-tools';
 
-app.get('/', (_: Request, res: Response) => {
-	console.log('Auth Service Works');
+// const app = express();
 
-	return res.status(200).json({ message: 'Auth Service ONLINE' });
-});
+// app.use(json());
 
-// ===========================================================
+// app.get('/', (_: Request, res: Response) => {
+// 	console.log('Auth Service Works');
 
-// Some fake data
-const books = [
-	{
-		title: "Harry Potter and the Sorcerer's stone",
-		author: 'J.K. Rowling',
-	},
-	{
-		title: 'Jurassic Park',
-		author: 'Michael Crichton',
-	},
-	{
-		title: 'Lameco STREAM',
-		author: 'Lameco',
-	},
-];
+// 	return res.status(200).json({ message: 'Auth Service ONLINE' });
+// });
 
-// The GraphQL schema in string form
-const typeDefs = `
-  type Query { books: [Book] }
+// // ===========================================================
 
-  type Mutation {
-    addBook(input: createBookInput!): Book
-  }
+// // Some fake data
+// const books = [
+// 	{
+// 		title: "Harry Potter and the Sorcerer's stone",
+// 		author: 'J.K. Rowling',
+// 	},
+// 	{
+// 		title: 'Jurassic Park',
+// 		author: 'Michael Crichton',
+// 	},
+// 	{
+// 		title: 'Lameco STREAM',
+// 		author: 'Lameco',
+// 	},
+// ];
 
-  input createBookInput {
-    title: String!
-    author: String!
-  }
+// // The GraphQL schema in string form
+// const typeDefs = `
+//   type Query { books: [Book] }
 
-  type Book { title: String, author: String }
-`;
+//   type Mutation {
+//     addBook(input: createBookInput!): Book
+//   }
 
-// The resolvers
-const resolvers = {
-	Query: { books: () => books },
+//   input createBookInput {
+//     title: String!
+//     author: String!
+//   }
 
-	Mutation: {
-		addBook: (_: any, { input }: any) => {
-			books.push(input);
+//   type Book { title: String, author: String }
+// `;
 
-			return input;
-		},
-	},
-};
+// // The resolvers
+// const resolvers = {
+// 	Query: { books: () => books },
 
-// Put together a schema
-const schema = makeExecutableSchema({
-	typeDefs,
-	resolvers,
-});
+// 	Mutation: {
+// 		addBook: (_: any, { input }: any) => {
+// 			books.push(input);
 
-app.use('/graphql', graphqlExpress({ schema }));
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+// 			return input;
+// 		},
+// 	},
+// };
 
-const PORT = process.env.PORT || 9001;
+// // Put together a schema
+// const schema = makeExecutableSchema({
+// 	typeDefs,
+// 	resolvers,
+// });
 
-app.listen(PORT, () => {
-	console.log(`Server running on ${PORT}`);
-});
+// app.use('/graphql', graphqlExpress({ schema }));
+// app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+
+// const PORT = process.env.PORT || 9001;
+
+// app.listen(PORT, () => {
+// 	console.log(`Server running on ${PORT}`);
+// });
