@@ -2,6 +2,11 @@ import { model, Schema } from 'mongoose';
 
 const usuarioSchema = new Schema(
 	{
+		status: {
+			type: Boolean,
+			required: true,
+			default: true,
+		},
 		nome: {
 			type: String,
 			required: true,
@@ -13,6 +18,10 @@ const usuarioSchema = new Schema(
 		senha: {
 			type: String,
 			required: true,
+		},
+		telefone: {
+			type: String,
+			required: false,
 		},
 		foto: {
 			type: String,
