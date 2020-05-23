@@ -1,3 +1,5 @@
+import {} from 'graphql-tools';
+
 export const typeDef = `
   type Usuario {
     status: Boolean!
@@ -6,6 +8,7 @@ export const typeDef = `
     email: String!
     telefone: String
     foto: String
+    // TO FIX
     createdAt: Date!
     updatedAt: Date!
   }
