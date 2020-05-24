@@ -1,6 +1,9 @@
 import { isEmpty } from '../is-empty';
 import { isLength } from '../is-length';
 
+import { Usuario } from '../../../models/Usuario';
+import { isEmail } from '../is-email';
+
 export async function validateCreateUsuarioInput(input: any) {
 	const errors = [];
 
@@ -35,6 +38,10 @@ export async function validateCreateUsuarioInput(input: any) {
 			key: 'senha',
 			message: 'O campo senha precisa ser entre 6 e 30 caracteres',
 		});
+	}
+
+	if (!isEmail(input?.email)) {
+		errors.push({ key: 'email', message: 'Email inválido' });
 	}
 
 	return {
