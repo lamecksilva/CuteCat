@@ -1,9 +1,11 @@
-import { Usuario } from '../../models/Usuario';
 import { hash } from 'bcrypt';
+
+import { Usuario } from '../../models/Usuario';
+import { validateCreateUsuarioInput } from '../../utils';
 
 export const typeDef = `
   type Mutation {
-    createUsuario(input: CreateUsuarioInput!): Usuario
+    createUsuario(input: CreateUsuarioInput!): CreateUsuarioPayload
   }
 
   input CreateUsuarioInput {
@@ -12,22 +14,32 @@ export const typeDef = `
     telefone: String!
     senha: String!
     senha_confirmation: String!
-  }
+	}
+	
+	type CreateUsuarioPayload {
+		Usuario: Usuario
+		errors: [ErrorType]
+	}
+
+	type ErrorType {
+		key: String
+		message: String
+	}
 `;
 
 export const resolvers = {
 	Mutation: {
 		createUsuario: async (_: any, { input }: any) => {
-			console.log(input);
+			const { errors, isValid } = await validateCreateUsuarioInput(input);
 
-			if (input.senha === input.senha_confirmation) {
+			if (!isValid) {
+				return { Usuario: null, errors };
+			} else {
 				input.senha = await hash(input.senha, 10);
 
-				const usuario = new Usuario(input);
+				const usuarioSaved = await new Usuario(input).save();
 
-				await usuario.save();
-
-				return usuario;
+				return { Usuario: usuarioSaved, errors };
 			}
 		},
 	},

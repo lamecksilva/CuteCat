@@ -13,7 +13,9 @@ export async function startServer() {
 	loadModels();
 
 	app.use('/graphql', graphqlExpress({ schema }));
-	app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+
+	process.env.NODE_ENV !== 'production' &&
+		app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 	const PORT = process.env.PORT || 9001;
 
