@@ -1,5 +1,5 @@
 import express, { json } from 'express';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 
 import { connectMongoDB, loadModels } from './database';
 import schema from './schema';
@@ -12,10 +12,14 @@ export async function startServer() {
 	connectMongoDB();
 	loadModels();
 
-	app.use('/graphql', graphqlExpress({ schema }));
+	// process.env.NODE_ENV !== 'production' &&
+	// app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
-	process.env.NODE_ENV !== 'production' &&
-		app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+	const server = new ApolloServer({
+		schema,
+	});
+
+	server.applyMiddleware({ app });
 
 	const PORT = process.env.PORT || 9001;
 

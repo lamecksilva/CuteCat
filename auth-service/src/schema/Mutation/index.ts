@@ -1,9 +1,11 @@
+import {gql } from "apollo-server-express"
+
 import { hash } from 'bcrypt';
 
 import { Usuario } from '../../models/Usuario';
 import { validateCreateUsuarioInput } from '../../utils';
 
-export const typeDef = `
+export const typeDef = gql`
   type Mutation {
     createUsuario(input: CreateUsuarioInput!): CreateUsuarioPayload
   }

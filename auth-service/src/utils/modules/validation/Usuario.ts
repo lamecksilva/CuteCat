@@ -44,6 +44,17 @@ export async function validateCreateUsuarioInput(input: any) {
 		errors.push({ key: 'email', message: 'Email inválido' });
 	}
 
+	if (!isEmpty(input?.email)) {
+		const usuario = await Usuario.findOne(
+			{ email: input?.email },
+			{ senha: 0 }
+		).lean();
+
+		if (usuario) {
+			errors.push({ key: 'email', message: 'Email já cadastrado' });
+		}
+	}
+
 	return {
 		isValid: errors.length === 0,
 		errors,

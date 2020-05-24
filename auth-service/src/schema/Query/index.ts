@@ -1,9 +1,11 @@
+import { gql } from 'apollo-server-express';
+
 import { Usuario } from '../../models/Usuario';
 
-export const typeDef = `
-  type Query {
-    Usuarios: [Usuario]
-  }
+export const typeDef = gql`
+	type Query {
+		Usuarios: [Usuario]
+	}
 `;
 
 export const resolvers = {

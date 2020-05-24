@@ -1,18 +1,18 @@
-import {} from 'graphql';
+import { gql } from 'apollo-server-express';
 
-export const typeDef = `
-  scalar Date
+export const typeDef = gql`
+	scalar Date
 
-  type Usuario {
-    status: Boolean!
-    id: ID!
-    nome: String!
-    email: String!
-    telefone: String
-    foto: String
-    createdAt: Date!
-    updatedAt: Date!
-  }
+	type Usuario {
+		status: Boolean!
+		id: ID!
+		nome: String!
+		email: String!
+		telefone: String
+		foto: String
+		createdAt: Date!
+		updatedAt: Date!
+	}
 `;
 
 export const resolvers = {
