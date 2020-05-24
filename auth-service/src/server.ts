@@ -1,5 +1,5 @@
 import express, { json } from 'express';
-import { graphqlExpress } from 'apollo-server-express';
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 
 import { connectMongoDB, loadModels } from './database';
 import schema from './schema';
@@ -13,6 +13,7 @@ export async function startServer() {
 	loadModels();
 
 	app.use('/graphql', graphqlExpress({ schema }));
+	app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 	const PORT = process.env.PORT || 9001;
 

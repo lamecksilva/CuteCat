@@ -1,6 +1,8 @@
-import {} from 'graphql-tools';
+import {} from 'graphql';
 
 export const typeDef = `
+  scalar Date
+
   type Usuario {
     status: Boolean!
     id: ID!
@@ -8,7 +10,6 @@ export const typeDef = `
     email: String!
     telefone: String
     foto: String
-    // TO FIX
     createdAt: Date!
     updatedAt: Date!
   }

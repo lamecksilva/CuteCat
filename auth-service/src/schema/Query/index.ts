@@ -8,7 +8,7 @@ export const typeDef = `
 
 export const resolvers = {
 	Query: {
-		usuarios: async () => {
+		Usuarios: async () => {
 			const usuarios = await Usuario.find({}).lean();
 
 			return usuarios;
