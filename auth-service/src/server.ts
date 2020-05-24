@@ -1,5 +1,5 @@
 import express, { json } from 'express';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 
 import { connectMongoDB, loadModels } from './database';
 import schema from './schema';
@@ -17,6 +17,12 @@ export async function startServer() {
 
 	const server = new ApolloServer({
 		schema,
+		context: ({ req }: any) => {
+			// if (!req.headers.authorization)
+			// throw new AuthenticationError('Authentication Error');
+
+			return { req };
+		},
 	});
 
 	server.applyMiddleware({ app });

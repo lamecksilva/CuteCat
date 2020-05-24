@@ -1,4 +1,4 @@
-import {gql } from "apollo-server-express"
+import { gql } from 'apollo-server-express';
 
 import { hash } from 'bcrypt';
 
@@ -6,18 +6,18 @@ import { Usuario } from '../../models/Usuario';
 import { validateCreateUsuarioInput } from '../../utils';
 
 export const typeDef = gql`
-  type Mutation {
-    createUsuario(input: CreateUsuarioInput!): CreateUsuarioPayload
-  }
-
-  input CreateUsuarioInput {
-    nome: String!
-    email: String!
-    telefone: String!
-    senha: String!
-    senha_confirmation: String!
+	type Mutation {
+		createUsuario(input: CreateUsuarioInput!): CreateUsuarioPayload
 	}
-	
+
+	input CreateUsuarioInput {
+		nome: String!
+		email: String!
+		telefone: String!
+		senha: String!
+		senha_confirmation: String!
+	}
+
 	type CreateUsuarioPayload {
 		Usuario: Usuario
 		errors: [ErrorType]
@@ -31,7 +31,9 @@ export const typeDef = gql`
 
 export const resolvers = {
 	Mutation: {
-		createUsuario: async (_: any, { input }: any) => {
+		createUsuario: async (_: any, { input }: any, { req }: any) => {
+			console.log(req.headers);
+
 			const { errors, isValid } = await validateCreateUsuarioInput(input);
 
 			if (!isValid) {
